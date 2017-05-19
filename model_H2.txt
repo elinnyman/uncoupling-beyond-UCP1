@@ -1,0 +1,66 @@
+********** MODEL NAME
+
+
+********** MODEL NOTES
+
+
+********** MODEL STATES
+d/dt(FA) = v1-v2   
+d/dt(H_in) = v3-v4
+d/dt(OLIG) = k_olig*(oligo-OLIG)
+d/dt(ATRA) = k_atra1*(k_atra2*atra-ATRA)
+                                                          
+FA(0) = 0                              
+H_in(0) = 0 
+OLIG(0) = 0
+ATRA(0) = 0
+
+********** MODEL PARAMETERS
+k_totH = 0.1                             
+k_bAR = 1                                               
+k_1 = 0.3                                                                                                      
+k_atp = 1
+k_FA1 = 1
+k_H = 1                                                                                               
+k_ucp1 = 1  
+k_leak = 1                                             
+k_nonmit = 1
+k_olig = 1
+k_atra1 = 1                                             
+k_atra2 = 1                                             
+
+k_FA2 = 1
+k_depl = 1  
+
+iso = 1
+oligo = 1                                                                                                    
+BA1 = 1
+BA2 = 1
+BA3 = 1
+bmp4=1
+atra = 1
+
+********** MODEL VARIABLES
+k_ucm = k_ucp1
+
+ETC = k_FA1*FA*(1+BA2)+k_H*(k_totH*(1+BA3)-H_in)
+UCP1 = (k_ucp1+k_FA2*FA)*BA1*(ATRA+1)
+LEAK = k_leak
+ATPase = k_atp*(1-OLIG)  
+                                                                   
+OCR_output = ETC+k_nonmit*(1+BA3)
+
+********** MODEL REACTIONS
+v1 = k_bAR*iso*k_depl
+v2 = k_1*FA
+v3 = ETC
+v4 = (LEAK+UCP1+ATPase)*H_in
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+
